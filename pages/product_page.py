@@ -18,6 +18,10 @@ class ProductPage(BasePage):
         price_in_basket = self.browser.find_element(*ProductPageLocators.PRICE_IN_BASKET).text
         assert item_price == price_in_basket, "Wrong price in basket"
 
-
-#messages .alert:nth-child(1) strong  = .product_page h1
-#messages .alert:nth-child(3) strong = p.price_color
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+        
+    def should_be_message_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
